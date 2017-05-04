@@ -1,57 +1,38 @@
-<nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">
-            <img src="../../images/instagram-1.jpg" width="30" height="30" class="d-inline-block align-top" alt=""> InstaPic</a>
-        </div>
-      <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-user"></span>
-                        <strong>Vaibhav</strong>
-                        <span class="glyphicon glyphicon-chevron-down"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <div class="navbar-login">
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <p class="text-center">
-                                            <span class="glyphicon glyphicon-user icon-size"></span>
-                                        </p>
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <p class="text-left"><strong>Vaibhav Aggarwal</strong></p>
-                                        <p class="text-left small">vaibhav.aggarwal@nyu.edu</p>
-                                        <p class="text-left">
-                                            <a href="#" class="btn btn-primary btn-block btn-sm">Profile</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="divider navbar-login-session-bg"></li>
-                         <li><a href="#">Account Settings <span class="glyphicon glyphicon-cog pull-right"></span></a></li>
-            <li class="divider"></li>
-            <li><a href="#">User stats <span class="glyphicon glyphicon-stats pull-right"></span></a></li>
-            <li class="divider"></li>
-            <li><a href="h#">Sign Out <span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
-                    </ul>
-                </li>
-            </ul>
-</div>
+<nav class="navbar navbar-default" style="background-color:white;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <img src="../../images/instagram-1.jpg" width="40" height="40" class="d-inline-block align-top" alt="instaPic"><p style="display:inline;align:center"> &nbsp;&nbsp;| &nbsp;&nbsp;<strong>InstaPic</strong></p>
+      </a>
+    </div>
+  </div>
 </nav>
+<div class="container" style="margin-bottom:50px;margin-top:50px;">
+  <div class="row">
+    <div class = "col-md-3 col-md-offset-1">
+      <img src = {{profilePicture}} class="image img-circle" style="width:180px;height:180px" title = {{profileName}} alt = {{profileName}}>
+    </div>
+    <div class =  "col-md-7">
+      <div class="container" style="font-size:xx-large">
+          <p>{{profileUsername}}</p>
+      </div>
+      <div class="container" style="font-size:x-large">
+          <p ><strong>{{profileName}}</strong><p>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="container">
   <div class="row">
     <div class="col-lg-4" *ngFor="let post of posts">
       <div class="containers">  
         <div class="thumbnail">
-          <a href={{post.link}} target="_blank"><img src= {{post.images.low_resolution.url}} alt="Avatar" class="image" style="width:100%;height:100%px"></a>
+          <a href={{post.link}} target="_blank"><img src= {{post.images.low_resolution.url}} alt="Avatar" class="image" style="width:100%;height:100%"></a>
           <div class="middle">
             <img src="./images/heart.png" style="width:30px;height:30px"> {{post.likes.count}}
             <br/>
             <div *ngIf="post.location">
-              <img src="./images/location.svg" style="width:30px;height:25px"> {{post.location.name}}
+              <img src="./images/location.png" style="width:30px;height:25px"><p style="display:inline;"> {{post.location.name}}</p>
             </div>
           </div>
         </div>

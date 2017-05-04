@@ -1,0 +1,17 @@
+<div *ngIf="isLoggedIn==true">
+  <home></home>
+</div>
+<div *ngIf="isLoggedIn==false">
+  <nav class="navbar navbar-default" style="background-color:white;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <img src="../../images/instagram-1.jpg" width="40" height="40" class="d-inline-block align-top" alt="instaPic"><p style="display:inline;align:center"> &nbsp;&nbsp;| &nbsp;&nbsp;<strong>instaPic</strong></p>
+      </a>
+    </div>
+  </div>
+</nav>
+  <!-- <button class="btn btn-primary" (click)="onLoginWithInstagram()">Authenticate with Instagram</button> -->
+  <button class="btn btn-primary" (click)="logIn()">Login with Instagram</button>
+</div>
+
