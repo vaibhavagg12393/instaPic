@@ -17,9 +17,9 @@
   </div>
 </div>
 
-<div class="modal fade" id="selectedPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
+<div class="modal fade" *ngIf="(selectedPost && (selectedPost.type == 'image' ||selectedPost.type == 'video' ))" id="selectedPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" *ngIf="(selectedPost && (selectedPost.type == 'image' ||selectedPost.type == 'video' ))">
+    <div class="modal-content" *ngIf="(selectedPost && (selectedPost.type == 'image' ||selectedPost.type == 'video' ))">
       <div class="modal-body" *ngIf="(selectedPost && selectedPost.type == 'image')">
         <img *ngIf="(selectedPost && selectedPost.type == 'image')" src={{selectedPost.images.standard_resolution.url}} class="img-responsive">
       </div>
@@ -27,6 +27,28 @@
         <video controls>
           <source *ngIf="(selectedPost && selectedPost.type == 'video')" src="{{selectedPost.videos.standard_resolution.url}}" type="video/mp4">
         </video>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" *ngIf="(selectedPost && selectedPost.type == 'carousel')" id="selectedPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" >
+        <div class="carousel slide" id="lightbox" data-ride="carousel" data-interval="false">
+          <div class="carousel-inner">
+            <div class = "item" *ngFor="let myimages of selectedPost.carousel_media;let first=first;let i=index" [attr.data-slide-to]="i" [ngClass]="{active: first}" data-target="#lightbox">
+              <img src={{myimages.images.standard_resolution.url}} class="img-responsive">
+            </div>
+          </div>
+          <a class="left carousel-control" href="#lightbox" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </a>
+          <a class="right carousel-control" href="#lightbox" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
