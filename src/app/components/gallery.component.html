@@ -11,27 +11,23 @@
               <img src="./images/location.png" style="width:30px;height:25px"><p style="display:inline;"> {{post.location.name}}</p>
             </div>
           </div>
-          <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-body">
-                  <img src={{post.images.standard_resolution.url}} class="img-responsive">
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
- <div class="modal fade" id="selectedPostModal" >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-           <img *ngIf="selectedPost" src="{{selectedPost.images.standard_resolution.url}}" >
-        </div>
+<div class="modal fade" id="selectedPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" *ngIf="(selectedPost && selectedPost.type == 'image')">
+        <img *ngIf="(selectedPost && selectedPost.type == 'image')" src={{selectedPost.images.standard_resolution.url}} class="img-responsive">
+      </div>
+      <div class="modal-body" *ngIf="(selectedPost && selectedPost.type == 'video')">
+        <video controls>
+          <source *ngIf="(selectedPost && selectedPost.type == 'video')" src="{{selectedPost.videos.standard_resolution.url}}" type="video/mp4">
+        </video>
       </div>
     </div>
   </div>
+</div>
