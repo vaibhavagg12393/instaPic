@@ -94,3 +94,7 @@ h1 {
 p.montserrat {
 font-family: 'Montserrat', sans-serif;
 }
+video {
+    width: 100%;
+    height: auto;
+}
