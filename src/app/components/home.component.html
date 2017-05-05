@@ -5,7 +5,20 @@
         <img src="../../images/instagram-1.jpg" width="40" height="40" class="d-inline-block align-top" alt="instaPic"><p style="display:inline;align:center"> &nbsp;&nbsp;| &nbsp;&nbsp;<strong>InstaPic</strong></p>
       </a>
     </div>
-  </div>
+    <div class="row">
+      <ul class="nav navbar-nav navbar-right">
+        <div class="col-md-4 col-offset-2">
+          <li><span class="glyphicon glyphicon-picture icon-size" role = "button"aria-hidden="true"></span></li>
+        </div>
+        <div class="col-md-4 col-offset-2">
+          <li><span class="glyphicon glyphicon-heart icon-size" role = "button"aria-hidden="true"></span></li>
+        </div>
+        <div class="col-md-4 col-offset-2">
+          <li><span class="glyphicon glyphicon-user icon-size" role = "button"aria-hidden="true"></span></li>
+        </div>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
 </nav>
 <div class="container" style="margin-bottom:50px;margin-top:50px;">
   <div class="row">
@@ -14,29 +27,12 @@
     </div>
     <div class =  "col-md-7">
       <div class="container" style="font-size:xx-large">
-          <p>{{profileUsername}}</p>
+          <p class="montserrat">{{profileUsername}}</p>
       </div>
       <div class="container" style="font-size:x-large">
-          <p ><strong>{{profileName}}</strong><p>
+          <p class="montserrat"><strong>{{profileName}}</strong><p>
       </div>
     </div>
   </div>
 </div>
-<div class="container">
-  <div class="row">
-    <div class="col-lg-4" *ngFor="let post of posts">
-      <div class="containers">  
-        <div class="thumbnail">
-          <a href={{post.link}} target="_blank"><img src= {{post.images.low_resolution.url}} alt="Avatar" class="image" style="width:100%;height:100%"></a>
-          <div class="middle">
-            <img src="./images/heart.png" style="width:30px;height:30px"> {{post.likes.count}}
-            <br/>
-            <div *ngIf="post.location">
-              <img src="./images/location.png" style="width:30px;height:25px"><p style="display:inline;"> {{post.location.name}}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<gallery [datasource]=posts></gallery>

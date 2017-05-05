@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4" *ngFor="let post of posts">
+      <div class="containers">  
+        <div class="thumbnail">
+          <img data-toggle="modal" data-target="#selectedPostModal" (click)=setSelectedPost(post) src= {{post.images.low_resolution.url}} alt="Avatar" class="image" style="width:100%;height:100%">
+          <div class="middle">
+            <img src="./images/heart.png" style="width:30px;height:30px"> {{post.likes.count}}
+            <br/>
+            <div *ngIf="post.location">
+              <img src="./images/location.png" style="width:30px;height:25px"><p style="display:inline;"> {{post.location.name}}</p>
+            </div>
+          </div>
+          <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <img src={{post.images.standard_resolution.url}} class="img-responsive">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <div class="modal fade" id="selectedPostModal" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+           <img *ngIf="selectedPost" src="{{selectedPost.images.standard_resolution.url}}" >
+        </div>
+      </div>
+    </div>
+  </div>

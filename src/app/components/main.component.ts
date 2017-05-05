@@ -16,8 +16,5 @@ export class MainComponent  {
 		this.isLoggedIn = true;
 		console.log(this.isLoggedIn);
 
-	}
-	// onLoginWithInstagram() {
- //    window.location.href = `https://api.instagram.com/oauth/authorize/?client_id=6d55380b81ea4d6a9a7a49e004c515aa&redirect_uri=https://localhost:3000/&response_type=code`;
- //  }
-}
+	}	
+} 
