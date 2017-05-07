@@ -37,6 +37,9 @@
     <div class="modal-content">
       <div class="modal-body" >
         <div class="carousel slide" id="lightbox" data-ride="carousel" data-interval="false">
+          <ol class="carousel-indicators">
+            <li data-target="#lightbox" *ngFor="let myimages of selectedPost.carousel_media;let first=first;let i=index" [attr.data-slide-to]="i" [ngClass]="{active: first}" data-target="#lightbox">0</li>
+          </ol>
           <div class="carousel-inner">
             <div class = "item" *ngFor="let myimages of selectedPost.carousel_media;let first=first;let i=index" [attr.data-slide-to]="i" [ngClass]="{active: first}" data-target="#lightbox">
               <img src={{myimages.images.standard_resolution.url}} class="img-responsive">
