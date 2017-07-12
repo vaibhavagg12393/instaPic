@@ -2,13 +2,15 @@
   <div class="row">
     <div class="col-lg-4" *ngFor="let post of posts">
       <div class="containers">  
-        <div class="thumbnail">
-          <img data-toggle="modal" data-target="#selectedPostModal" (click)=setSelectedPost(post) src= {{post.images.low_resolution.url}} alt="Avatar" class="image" style="width:100%;height:100%">
+        <div class="thumbnail containderdiv">
+          <img data-toggle="modal" data-target="#selectedPostModal" (click)=setSelectedPost(post) src= {{post.images.low_resolution.url}} alt="Avatar" class="image" style="width:100%;height:100%;">
+          <img *ngIf="post.type=='carousel'" style="border:0;position:absolute;top:5px;right:5px;width:10%;height:10%" src = "./images/carousel.png">
+          <img *ngIf="post.type=='video'" style="border:0;position:absolute;top:5px;right:5px;width:15%;height:15%" src = "./images/video.png">
           <div class="middle">
             <img src="./images/heart.png" style="width:30px;height:30px"> {{post.likes.count}}
             <br/>
             <div *ngIf="post.location">
-              <img src="./images/location.png" style="width:30px;height:25px"><p style="display:inline;"> {{post.location.name}}</p>
+              <img src="./images/location.png" style="width:30px;height:25px"><p style="display:inline;" *ngIf="post.location.name"> {{post.location.name}}</p>
             </div>
           </div>
         </div>
@@ -20,13 +22,44 @@
 <div class="modal fade" *ngIf="(selectedPost && (selectedPost.type == 'image' ||selectedPost.type == 'video' ))" id="selectedPostModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" *ngIf="(selectedPost && (selectedPost.type == 'image' ||selectedPost.type == 'video' ))">
     <div class="modal-content" *ngIf="(selectedPost && (selectedPost.type == 'image' ||selectedPost.type == 'video' ))">
-      <div class="modal-body" *ngIf="(selectedPost && selectedPost.type == 'image')">
-        <img *ngIf="(selectedPost && selectedPost.type == 'image')" src={{selectedPost.images.standard_resolution.url}} class="img-responsive">
-      </div>
-      <div class="modal-body" *ngIf="(selectedPost && selectedPost.type == 'video')">
-        <video controls>
-          <source *ngIf="(selectedPost && selectedPost.type == 'video')" src="{{selectedPost.videos.standard_resolution.url}}" type="video/mp4">
-        </video>
+      <div class="modal-body">
+        <div class = "row">
+          <div class = "col-md-8">
+            <img *ngIf="(selectedPost && selectedPost.type == 'image')" src={{selectedPost.images.standard_resolution.url}} class="img-responsive">
+            <video controls *ngIf="(selectedPost && selectedPost.type == 'video')">
+              <source *ngIf="(selectedPost && selectedPost.type == 'video')" src="{{selectedPost.videos.standard_resolution.url}}" type="video/mp4">
+            </video>
+          </div>
+          <div class = "col-md-4">
+            <div class = "row">
+              <div class = "col-md-3">
+                <img class="img-circle" width="45" height="45" src="{{selectedPost.caption.from.profile_picture}}">
+              </div>
+              <div class = "col-md-9">
+                <strong>{{selectedPost.caption.from.username}}</strong><br />
+                <p *ngIf="selectedPost.location && selectedPost.location.name">{{selectedPost.location.name}}</p>
+              </div>
+            </div>
+            <hr>
+            <p><strong>{{selectedPost.likes.count}} likes</strong></p>
+            <p><strong>{{selectedPost.caption.from.username}} </strong>{{selectedPost.caption.text}}</p>
+            <div class = "scroll">
+              <div class = "row"  *ngFor="let link of links; let i = index">
+                <div class = "col-md-9">
+                  <div>
+                    <a href={{link}}>{{link}}</a>
+                  </div>
+                </div>
+                <div class = "col-md-3">
+                  <span class = "glyphicon glyphicon-trash" role="button" (click)="deleteLink(i)"></span>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <span (click)="addLink(link.value)" class = "glyphicon glyphicon-link" style="cursor:pointer;"></span>
+            <input type="text" #link style="border:none;" placeholder="Add link..."/><br />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -36,21 +69,57 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body" >
-        <div class="carousel slide" id="lightbox" data-ride="carousel" data-interval="false">
-          <ol class="carousel-indicators">
-            <li data-target="#lightbox" *ngFor="let myimages of selectedPost.carousel_media;let first=first;let i=index" [attr.data-slide-to]="i" [ngClass]="{active: first}" data-target="#lightbox">0</li>
-          </ol>
-          <div class="carousel-inner">
-            <div class = "item" *ngFor="let myimages of selectedPost.carousel_media;let first=first;let i=index" [attr.data-slide-to]="i" [ngClass]="{active: first}" data-target="#lightbox">
-              <img src={{myimages.images.standard_resolution.url}} class="img-responsive">
+        <div class="row">
+          <div class = "col-md-8">
+            <div class="carousel slide" id="lightbox" data-ride="carousel" data-interval="false">
+              <ol class="carousel-indicators">
+                <li data-target="#lightbox" *ngFor="let myimages of selectedPost.carousel_media;let first=first;let i=index" [attr.data-slide-to]="i" [ngClass]="{active: first}" data-target="#lightbox"></li>
+              </ol>
+              <div class="carousel-inner">
+                <div class = "item" *ngFor="let myimages of selectedPost.carousel_media;let first=first;let i=index" [attr.data-slide-to]="i" [ngClass]="{active: first}" data-target="#lightbox">
+                  <img *ngIf = "myimages.type=='image'" src={{myimages.images.standard_resolution.url}} class="img-responsive">
+                  <video controls *ngIf="myimages.type == 'video'">
+                    <source *ngIf="myimages.type == 'video'" src={{myimages.videos.standard_resolution.url}} type="video/mp4">
+                  </video>
+                </div>
+              </div>
+              <a class="left carousel-control" href="#lightbox" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+              </a>
+              <a class="right carousel-control" href="#lightbox" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+              </a>
             </div>
           </div>
-          <a class="left carousel-control" href="#lightbox" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-          </a>
-          <a class="right carousel-control" href="#lightbox" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-          </a>
+          <div class = "col-md-4">
+            <div class = "row">
+              <div class = "col-md-3">
+                <img class="img-circle" width="45" height="45" src="{{selectedPost.caption.from.profile_picture}}">
+              </div>
+              <div class = "col-md-9">
+                <strong>{{selectedPost.caption.from.username}}</strong><br />
+                <p *ngIf="selectedPost.location && selectedPost.location.name">{{selectedPost.location.name}}</p>
+              </div>
+            </div>
+            <hr>
+            <p><strong>{{selectedPost.likes.count}} likes</strong></p>
+            <p><strong>{{selectedPost.caption.from.username}} </strong>{{selectedPost.caption.text}}</p>
+            <div class = "scroll">
+              <div class = "row"  *ngFor="let link of links; let i = index">
+                <div class = "col-md-9">
+                  <div>
+                    <a href={{link}}>{{link}}</a>
+                  </div>
+                </div>
+                <div class = "col-md-3">
+                  <span class = "glyphicon glyphicon-trash" role="button" (click)="deleteLink(i)"></span>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <span (click)="addLink(link.value)" class = "glyphicon glyphicon-link" style="cursor:pointer;"></span>
+            <input type="text" #link style="border:none;" placeholder="Add link..."/><br />
+          </div>
         </div>
       </div>
     </div>

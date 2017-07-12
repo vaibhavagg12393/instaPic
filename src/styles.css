@@ -85,12 +85,12 @@ h1 {
 }
 
 /* Modal Content (image) */
-.modal-content {
+/*.modal-content {
     margin: auto;
     display: block;
-    width: 80%;
-    max-width: 700px;
-}
+    width: 50%;
+    max-width: 1000px;
+}*/
 
 p.montserrat {
 font-family: 'Montserrat', sans-serif;
@@ -113,3 +113,31 @@ video {
 @media (max-width: @screen-xs-min) {
   .modal-xs { width: @modal-sm; }
 }
+
+.customHr {
+    width: 95%
+    font-size: 1px;
+    color: rgba(0, 0, 0, 0);
+    line-height: 1px;
+    
+    background-color: grey;
+    margin-top: -6px;
+    margin-bottom: 10px;
+}
+
+div.scroll {
+  width: 100%;
+  height: 130px;
+  max-height: 130px;
+  overflow: scroll;
+}
+
+input:focus {
+    outline:none;
+}
+
+.containerdiv {
+  border: 0;
+  float: left;
+  position: relative;
+} 

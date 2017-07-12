@@ -9,32 +9,41 @@ import { Router } from '@angular/router';
   providers: [PostsService]
   ,
   styles: [`
-  	ul { padding:0; width:780px; margin:20px auto}
-  	li { display:inline;}
-        .tn{ 
-	   margin:2px 0px;
-	   box-shadow:#999 1px 1px 3px 1px; 
-	   cursor: pointer 
-        }
   	.modal-content {
-	    width: 670px !important;
+	    width: 800px !important;
 	}
   `]
 })
-export class GalleryComponent { 
+export class GalleryComponent {
+  @Input() datasource;
+  selectedPost;
+  Links: string[];
+  showLinks: boolean;
  
-   @Input() datasource;
-   selectedPost;
- 
-   setSelectedPost(post){
-      this.selectedPost= post;	
-   }
-   constructor(private postsService: PostsService){
-     this.postsService.getPosts().subscribe(posts => {
-          this.posts = posts.items;
-          this.profilePicture = posts.items[0].user.profile_picture;
-          this.profileName = posts.items[0].user.full_name;
-          this.profileUsername = posts.items[0].user.username;
-      });
-  } 
+  setSelectedPost(post){
+    this.selectedPost= post;	
+  }
+  constructor(private postsService: PostsService){
+    this.postsService.getPosts().subscribe(posts => {
+      this.posts = posts.items;
+      this.profilePicture = posts.items[0].user.profile_picture;
+      this.profileName = posts.items[0].user.full_name;
+      this.profileUsername = posts.items[0].user.username;
+    });
+    this.links = ['https://www.facebook.com', 'https://www.instagram.com', 'https://twitter.com','https://blog.myblog.com','https://addablog.com',
+    'https://www.facebook.com', 'https://www.instagram.com', 'https://twitter.com','https://blog.myblog.com']
+    this.showLinks = false;
+  }
+
+  toggleLinks(){
+      this.showLinks = !this.showLinks;
+  }
+
+  addLink(link: any){
+      this.links.push(link);
+  }
+
+  deleteLink(i: any){
+      this.links.splice(i, 1);
+  }
 }
