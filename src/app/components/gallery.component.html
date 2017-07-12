@@ -41,6 +41,8 @@
               </div>
             </div>
             <hr>
+            <img #image *ngIf="selectedPost.user_has_liked==false" role="button" src="./images/heart.png" style="width:30px;height:30px" (click)="changeHeart(image)">
+            <img #image *ngIf="selectedPost.user_has_liked==true" role="button" src="./images/redheart.png" style="width:30px;height:30px" (click)="changeHeart(image)">
             <p><strong>{{selectedPost.likes.count}} likes</strong></p>
             <p><strong>{{selectedPost.caption.from.username}} </strong>{{selectedPost.caption.text}}</p>
             <div class = "scroll">
@@ -102,6 +104,8 @@
               </div>
             </div>
             <hr>
+            <img #image *ngIf="selectedPost.user_has_liked==false" src="./images/heart.png" style="width:30px;height:30px" (click)="changeHeart(image)">
+            <img #image *ngIf="selectedPost.user_has_liked==true" src="./images/redheart.png" style="width:30px;height:30px" (click)="changeHeart(image)">
             <p><strong>{{selectedPost.likes.count}} likes</strong></p>
             <p><strong>{{selectedPost.caption.from.username}} </strong>{{selectedPost.caption.text}}</p>
             <div class = "scroll">

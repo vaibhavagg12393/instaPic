@@ -46,4 +46,13 @@ export class GalleryComponent {
   deleteLink(i: any){
       this.links.splice(i, 1);
   }
+
+  changeHeart(image:any) {
+   if(image.src='./images/heart.png'){
+     image.src='./images/redheart.png';
+   }
+   else if(image.src='./images/redheart.png'){
+     image.src='./images/heart.png';
+   }
+  }
 }
